@@ -1,58 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test Hệ thống dangKhoaUni</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md text-center">
-        <h1 class="text-2xl font-bold text-blue-600 mb-4">dangKhoaUni Project</h1>
-        <p class="text-gray-600 mb-6">Trạng thái kết nối Backend:</p>
+      <h1 class="text-2xl font-bold text-blue-600 mb-4">dangKhoaUni Project</h1>
+      <p class="text-gray-600 mb-6">Trạng thái kết nối Backend:</p>
 
-        <!-- Nơi hiển thị kết quả test -->
-        <div id="status-box" class="p-4 rounded-md bg-yellow-100 text-yellow-700 mb-4">
-            Đang kiểm tra kết nối...
-        </div>
+      <!-- Nơi hiển thị kết quả test -->
+      <div
+        id="status-box"
+        class="p-4 rounded-md bg-yellow-100 text-yellow-700 mb-4"
+      >
+        Đang kiểm tra kết nối...
+      </div>
 
-        <button onclick="testAPI()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition">
-            Thử gọi API lại
-        </button>
+      <button
+        onclick="testAPI()"
+        class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition"
+      >
+        Thử gọi API lại
+      </button>
 
-        <div class="mt-6 text-sm text-gray-400">
-            Cấu hình hiện tại: <br>
-            <span class="font-mono">public_html/api/index.php</span>
-        </div>
+      <div class="mt-6 text-sm text-gray-400">
+        Cấu hình hiện tại: <br />
+        <span class="font-mono">public_html/api/index.php</span>
+      </div>
     </div>
 
     <script>
-        async function testAPI() {
-            const statusBox = document.getElementById('status-box');
-            
-            // Đường dẫn này trỏ vào thư mục api nằm cùng cấp với index.html
-            // Chúng ta gọi thử route mặc định của Laravel
-            try {
-                // Gọi trực tiếp vào file index.php để bỏ qua lỗi .htaccess nếu có
-const response = await axios.get('/api/index.php/api/test-db');
-                // Lưu ý: Tùy vào cách bạn định nghĩa route trong api.php 
-                // Nếu chưa có route nào, hãy thử gọi đường dẫn gốc của api:
-                // const response = await axios.get('/api/');
+      async function testAPI() {
+        const statusBox = document.getElementById("status-box");
 
-                statusBox.className = "p-4 rounded-md bg-green-100 text-green-700 mb-4";
-                statusBox.innerText = "Kết nối Backend THÀNH CÔNG!";
-                console.log("Dữ liệu trả về:", response.data);
-            } catch (error) {
-                statusBox.className = "p-4 rounded-md bg-red-100 text-red-700 mb-4";
-                statusBox.innerText = "Lỗi kết nối: " + error.message;
-                console.error(error);
-            }
+        // Đường dẫn này trỏ vào thư mục api nằm cùng cấp với index.html
+        // Chúng ta gọi thử route mặc định của Laravel
+        try {
+          // Gọi trực tiếp vào file index.php để bỏ qua lỗi .htaccess nếu có
+          const response = await axios.get("/api/index.php/api/test-db");
+          // Lưu ý: Tùy vào cách bạn định nghĩa route trong api.php
+          // Nếu chưa có route nào, hãy thử gọi đường dẫn gốc của api:
+          // const response = await axios.get('/api/');
+
+          statusBox.className =
+            "p-4 rounded-md bg-green-100 text-green-700 mb-4";
+          statusBox.innerText = "Kết nối Backend THÀNH CÔNG!";
+          console.log("Dữ liệu trả về:", response.data);
+        } catch (error) {
+          statusBox.className = "p-4 rounded-md bg-red-100 text-red-700 mb-4";
+          statusBox.innerText = "Lỗi kết nối: " + error.message;
+          console.error(error);
         }
+      }
 
-        // Tự động chạy khi load trang
-        testAPI();
+      // Tự động chạy khi load trang
+      testAPI();
     </script>
-</body>
+  </body>
 </html>
