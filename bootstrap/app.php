@@ -12,10 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->alias([
-            'role' => \App\Http\Middleware\CheckRole::class,
+        // Cấu hình CORS tại đây
+        $middleware->validateCsrfTokens(except: [
+            'api/*', // Loại bỏ kiểm tra CSRF cho các route API
         ]);
     })
-    ->withExceptions(function (Exceptions $exceptions): void {
+    ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
