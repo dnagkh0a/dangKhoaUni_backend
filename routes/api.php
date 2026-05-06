@@ -23,7 +23,6 @@ use App\Http\Controllers\Api\AnnouncementController;
 // 1. PUBLIC ROUTES (Không cần đăng nhập)
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-
 // 2. PROTECTED ROUTES (Bắt buộc phải có Token Bearer)
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -97,11 +96,4 @@ Route::middleware('auth:sanctum')->group(function () {
         });
     });
 
-});
-// Route backend trả về danh sách sinh viên
-Route::get('/students', function () {
-    return response()->json([
-        ['id' => 1, 'name' => 'Nguyễn Văn A'],
-        ['id' => 2, 'name' => 'Trần Thị B']
-    ]);
 });
